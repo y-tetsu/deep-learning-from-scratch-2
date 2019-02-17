@@ -54,9 +54,6 @@ class SoftmaxWithLoss:
         self.t = t
         self.y = softmax(x)
 
-        if self.t.size == self.y.size:
-            self.t = self.t.argmax(axis=1)
-
         loss = cross_entropy_error(self.y, self.t)
 
         return loss
@@ -155,3 +152,11 @@ if __name__ == '__main__':
     y1 = np.array([[0.1, 0.2, 0.7], [0.1, 0.2, 0.7], [0.1, 0.2, 0.7]])
     t1 = np.array([[0, 0, 1], [0, 1, 0], [1, 0, 0]])
     print(cross_entropy_error(y1, t1))
+
+    x = np.array([[1, 1], [2, 2]])
+    model = TwoLayerNet(2, 4, 3)
+    s = model.predict(x)
+    print("test", s)
+
+    t = np.array([[0, 0, 1], [0, 1, 0]])
+    print("loss", model.forward(x, t))
